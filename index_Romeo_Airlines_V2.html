@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Romeo Airlines | Home</title>
+<link rel="icon" type="image/jpeg" href="logo.jpeg">
+<link rel="stylesheet" href="styles.css">
+<style>
+:root{
+  --navy:#092653;
+  --blue:#0f3d78;
+  --red:#b51b36;
+  --text:#10284d;
+}
+.home-hero{
+  min-height:680px;
+  display:flex;
+  align-items:center;
+  position:relative;
+  overflow:hidden;
+}
+.home-hero:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(90deg,rgba(5,25,55,.82),rgba(5,25,55,.48),rgba(5,25,55,.12));
+  pointer-events:none;
+}
+.hero-content{position:relative;z-index:2;width:100%}
+.hero-copy{max-width:700px}
+.hero-logo{
+  width:125px;height:125px;object-fit:contain;
+  background:#fff;border-radius:22px;padding:12px;
+  box-shadow:0 18px 45px rgba(0,0,0,.22);
+  margin-bottom:24px;
+}
+.pill{
+  display:inline-flex;padding:8px 13px;border-radius:999px;
+  background:rgba(255,255,255,.13);
+  border:1px solid rgba(255,255,255,.35);
+  color:#fff;font-size:12px;font-weight:900;letter-spacing:1.5px;
+  margin-bottom:14px;
+}
+.home-hero h1{
+  font-size:clamp(42px,6vw,76px);
+  line-height:1.02;margin:0 0 20px;color:#fff;
+  letter-spacing:-1.5px;
+}
+.home-hero h1 em{font-style:normal;color:#e8eef7}
+.home-hero p{
+  max-width:620px;color:rgba(255,255,255,.9);
+  font-size:17px;line-height:1.7;margin:0;
+}
+.hero-actions{
+  display:flex;align-items:center;gap:12px;margin-top:28px;flex-wrap:wrap
+}
+.secondary{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:50px;padding:0 23px;border:1px solid rgba(255,255,255,.7);
+  border-radius:8px;color:#fff;text-decoration:none;font-weight:800;
+  background:rgba(0,20,50,.2);backdrop-filter:blur(7px)
+}
+.secondary:hover{background:rgba(0,20,50,.4)}
+.home-services{padding-top:70px;padding-bottom:70px}
+.section-intro{max-width:650px;color:#68778b;margin:0 0 25px}
+.home-service-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:16px;margin-top:25px
+}
+.home-service-card{
+  display:flex;align-items:center;gap:15px;padding:23px 24px;
+  border:1px solid #dfe6ee;border-radius:14px;background:#fff;
+  text-decoration:none;color:#10284d;
+  box-shadow:0 8px 26px rgba(9,38,83,.07);transition:.2s
+}
+.home-service-card:hover{
+  transform:translateY(-4px);box-shadow:0 14px 34px rgba(9,38,83,.12)
+}
+.home-service-card.featured{border-color:var(--red)}
+.service-icon{
+  width:48px;height:48px;border-radius:10px;background:#eef3f8;
+  display:grid;place-items:center;color:var(--red);font-size:21px;
+  font-weight:900;flex:0 0 48px
+}
+.home-service-card b{display:block;font-size:18px;margin-bottom:5px}
+.home-service-card small{display:block;color:#718096;font-size:12px}
+.service-arrow{margin-left:auto;font-size:21px;color:var(--red)}
+.home-network .container{
+  display:grid;grid-template-columns:1.4fr 1fr;gap:45px;align-items:center
+}
+.network-copy p{max-width:650px;color:#69788b;line-height:1.7}
+.network-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.network-stats div{
+  background:#fff;border:1px solid #dfe6ee;border-radius:12px;
+  padding:20px 12px;text-align:center
+}
+.network-stats strong{display:block;font-size:27px;color:#10284d}
+.network-stats span{display:block;font-size:11px;color:#748197;margin-top:6px}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:28px 0}
+.values-grid>div{
+  background:#fff;border:1px solid #dfe6ee;border-radius:13px;
+  padding:24px;text-align:left
+}
+.values-grid strong{font-size:20px;color:#10284d}
+.values-grid p{color:#718096;font-size:13px;line-height:1.55}
+.text-link{color:var(--red);text-decoration:none;font-weight:900}
+@media(max-width:800px){
+  .home-hero{min-height:650px}
+  .hero-copy{max-width:100%}
+  .hero-logo{width:105px;height:105px}
+  .home-service-grid,.home-network .container,.values-grid{grid-template-columns:1fr}
+  .network-stats{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:500px){
+  .home-hero{min-height:650px}
+  .home-hero h1{font-size:44px}
+  .home-hero p{font-size:15px}
+  .hero-actions{flex-direction:column;align-items:stretch}
+  .hero-actions a{width:100%}
+  .network-stats{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+<div class="container header-inner">
+<a class="brand" href="index.html">
+<img src="logo.jpeg" alt="Romeo Airlines">
+<span>Romeo <strong>Airlines</strong></span>
+</a>
+<nav id="mainNav">
+<a href="index.html"><span class="en">Home</span><span class="ar">الرئيسية</span></a>
+<a href="manage.html"><span class="en">Manage Booking</span><span class="ar">إدارة الحجز</span></a>
+<a href="timetable.html"><span class="en">Timetable</span><span class="ar">جدول الرحلات</span></a>
+<a href="destinations.html"><span class="en">Destinations</span><span class="ar">الوجهات</span></a>
+<a href="about.html"><span class="en">About Us</span><span class="ar">من نحن</span></a>
+<a href="fleet.html"><span class="en">Our Fleet</span><span class="ar">أسطولنا</span></a>
+<a href="careers.html"><span class="en">Careers</span><span class="ar">الوظائف</span></a>
+<a href="contact.html"><span class="en">Contact Us</span><span class="ar">اتصل بنا</span></a>
+<a href="faq.html"><span class="en">FAQ</span><span class="ar">الأسئلة الشائعة</span></a>
+</nav>
+<div class="language-switch">
+<button class="ghost" id="languageToggle" onclick="toggleLanguage()">العربية</button>
+</div>
+<button class="icon-btn" onclick="toggleMenu()">☰</button>
+</div>
+</header>
+
+<main>
+<section class="hero home-hero">
+<div class="container hero-content">
+<div class="hero-copy">
+
+<img class="hero-logo" src="logo.jpeg" alt="Romeo Airlines Logo">
+
+<div class="pill">ROMEO AIRLINES</div>
+
+<h1>Connecting People,<br><em>Redefining the Skies.</em></h1>
+
+<p>
+Discover a modern airline experience connecting cities, communities and people
+with reliable, comfortable and professional air travel.
+</p>
+
+<div class="hero-actions">
+<a class="primary hero-btn" href="book.html">Book Your Flight <span>→</span></a>
+<a class="secondary hero-btn-alt" href="destinations.html">Explore Destinations</a>
+</div>
+
+</div>
+</div>
+</section>
+
+<section class="section home-services">
+<div class="container">
+<div class="eyebrow">TRAVEL WITH ROMEO</div>
+<h2>Your journey starts here.</h2>
+<p class="section-intro">
+Quick access to the essential travel information and services you need.
+</p>
+
+<div class="home-service-grid">
+<a class="home-service-card featured" href="book.html">
+<span class="service-icon">✈</span>
+<div><b>Book a Flight</b><small>Search and book your next journey.</small></div>
+<span class="service-arrow">→</span>
+</a>
+
+<a class="home-service-card" href="manage.html">
+<span class="service-icon">▣</span>
+<div><b>Manage Booking</b><small>Retrieve and manage your reservation.</small></div>
+<span class="service-arrow">→</span>
+</a>
+
+<a class="home-service-card" href="destinations.html">
+<span class="service-icon">⌖</span>
+<div><b>Destinations</b><small>Explore the Romeo Airlines network.</small></div>
+<span class="service-arrow">→</span>
+</a>
+
+<a class="home-service-card" href="timetable.html">
+<span class="service-icon">◷</span>
+<div><b>Timetable</b><small>View scheduled flights and routes.</small></div>
+<span class="service-arrow">→</span>
+</a>
+</div>
+</div>
+</section>
+
+<section class="section light home-network">
+<div class="container">
+<div class="network-copy">
+<div class="eyebrow">OUR NETWORK</div>
+<h2>Connecting People with the World.</h2>
+<p>
+From our operational home in Port Sudan, Romeo Airlines is being built to
+connect Sudan with key regional, African and international destinations.
+</p>
+<a class="primary" href="destinations.html">Explore Destinations</a>
+</div>
+
+<div class="network-stats">
+<div><strong>7</strong><span>Planned destinations</span></div>
+<div><strong>1</strong><span>Operational home</span></div>
+<div><strong>2030</strong><span>Planned operations</span></div>
+</div>
+</div>
+</section>
+
+<section class="section home-why">
+<div class="container center">
+<div class="eyebrow">THE ROMEO STANDARD</div>
+<h2>Built around what matters.</h2>
+
+<div class="values-grid">
+<div><strong>Safety</strong><p>Safety is our highest priority in every operation.</p></div>
+<div><strong>Reliability</strong><p>Dependable connections for passengers and businesses.</p></div>
+<div><strong>Service</strong><p>Professional, respectful and welcoming service.</p></div>
+</div>
+
+<a class="text-link" href="about.html">Discover Romeo Airlines →</a>
+</div>
+</section>
+</main>
+
+<footer>
+<div class="container footer-grid">
+<div>
+<img src="logo.jpeg" alt="Romeo Airlines">
+<p>Connecting Hearts, Redefining the Skies.</p>
+</div>
+<div><h4>Travel</h4><a href="destinations.html">Destinations</a><a href="status.html">Flight Status</a><a href="timetable.html">Timetable</a></div>
+<div><h4>Booking</h4><a href="book.html">Book a Flight</a><a href="manage.html">Manage Booking</a><a href="checkin.html">Check-in</a></div>
+<div><h4>Company</h4><a href="about.html">About Us</a><a href="fleet.html">Our Fleet</a><a href="careers.html">Careers</a><a href="contact.html">Contact Us</a></div>
+</div>
+<div class="footer-bottom">© 2026 Romeo Airlines · Connecting People with the World.</div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
