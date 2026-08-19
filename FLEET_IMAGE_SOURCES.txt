@@ -1,0 +1,11 @@
+Updated fleet images:
+- Boeing 737: Wikimedia Commons — Unmarked Boeing 737, all white.
+- Fokker 50: Wikimedia Commons — Fokker 50 PH-JXJ, all-white livery.
+- Fokker 70: Wikimedia Commons — Premier Airlines Fokker 70 5Y-JWF.
+  The aircraft has been reported as all white; verify the current source image before commercial publication.
+- Dash 8: Wikimedia Commons — Unmarked Dash DHC-8 in all-white colors.
+- Bombardier Q Series: Wikimedia Commons — Q400Tanker image, selected to avoid airline branding.
+- ATR 72-500: Wikimedia Commons — EC-KAD ATR 72, all white/no titles.
+
+The fleet image container remains 210px high, matching the previous fleet design.
+Review each Wikimedia Commons file page for its license/attribution requirements before commercial publication.

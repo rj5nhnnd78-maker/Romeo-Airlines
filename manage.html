@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Romeo Airlines | Manage Booking</title><link rel="icon" type="image/jpeg" href="logo.jpeg"><link rel="stylesheet" href="styles.css"></head><body>
+<header class="header">
+<div class="container header-inner">
+<a class="brand" href="index.html"><img src="logo.jpeg" alt="Romeo Airlines"><span>Romeo <strong>Airlines</strong></span></a>
+<nav id="mainNav">
+<a href="index.html"><span class="en">Home</span><span class="ar">الرئيسية</span></a>
+<a href="manage.html"><span class="en">Manage Booking</span><span class="ar">إدارة الحجز</span></a>
+<a href="timetable.html"><span class="en">Timetable</span><span class="ar">جدول الرحلات</span></a>
+<a href="destinations.html"><span class="en">Destinations</span><span class="ar">الوجهات</span></a>
+<a href="about.html"><span class="en">About Us</span><span class="ar">من نحن</span></a>
+<a href="fleet.html"><span class="en">Our Fleet</span><span class="ar">أسطولنا</span></a>
+<a href="careers.html"><span class="en">Careers</span><span class="ar">الوظائف</span></a>
+<a href="contact.html"><span class="en">Contact Us</span><span class="ar">اتصل بنا</span></a>
+<a href="faq.html"><span class="en">FAQ</span><span class="ar">الأسئلة الشائعة</span></a>
+</nav>
+<div class="language-switch"><button class="ghost" id="languageToggle" onclick="toggleLanguage()">العربية</button></div>
+<button class="icon-btn" onclick="toggleMenu()">☰</button>
+</div></header><main>
+<section class="page-hero">
+<div class="container">
+<div class="eyebrow">YOUR JOURNEY</div>
+<h1><span class="en">Manage Booking</span><span class="ar">إدارة الحجز</span></h1>
+<p><span class="en">All booking-related services are organized here.</span><span class="ar">جميع الخدمات المتعلقة بحجزك موجودة هنا.</span></p>
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+<div class="manage-flow">
+<div class="manage-flow-step active"><span>1</span><div><b class="en">Manage Booking</b><b class="ar">إدارة الحجز</b><small class="en">Retrieve, change or cancel your reservation.</small><small class="ar">استرجع أو غيّر أو ألغِ حجزك.</small></div></div>
+<div class="flow-arrow">↓</div>
+<div class="manage-flow-step"><span>2</span><div><b class="en">Check-in</b><b class="ar">تسجيل الوصول</b><small class="en">Available after your booking is confirmed.</small><small class="ar">متاح بعد تأكيد الحجز.</small></div></div>
+<div class="flow-arrow">↓</div>
+<div class="manage-flow-step"><span>3</span><div><b class="en">Flight Status</b><b class="ar">حالة الرحلة</b><small class="en">Follow your confirmed flight.</small><small class="ar">تابع حالة رحلتك المؤكدة.</small></div></div>
+</div>
+
+<div class="manage-actions">
+<a class="manage-action-card" href="book.html"><span class="action-number">A</span><h3>Book a Flight</h3><p>Start a new reservation. The booking system will guide you through every step automatically.</p><span class="action-link">Start booking →</span></a>
+<a class="manage-action-card" href="checkin.html"><span class="action-number">B</span><h3>Check-in</h3><p>After you have a confirmed booking, continue to online check-in.</p><span class="action-link">Check in →</span></a>
+<a class="manage-action-card" href="status.html"><span class="action-number">C</span><h3>Flight Status</h3><p>Check the latest status of your confirmed flight.</p><span class="action-link">Check status →</span></a>
+</div>
+
+<div class="form-card manage-lookup">
+<h2><span class="en">Retrieve your booking</span><span class="ar">استرجاع الحجز</span></h2>
+<label><span class="en">Booking Reference / PNR</span><span class="ar">رقم الحجز PNR</span><input id="managePnr" placeholder="e.g. RA7K2P"></label>
+<label><span class="en">Last Name</span><span class="ar">اسم العائلة</span><input id="manageLast" placeholder="Passenger last name"></label>
+<button class="primary" onclick="manageBooking()"><span class="en">Retrieve Booking</span><span class="ar">استرجاع الحجز</span></button>
+<p id="manageMessage" class="notice"></p>
+</div>
+</div>
+</section>
+</main><footer><div class="container footer-grid">
+<div><img src="logo.jpeg" alt="Romeo Airlines"><p>Connecting Hearts, Redefining the Skies.</p></div>
+<div><h4>Booking</h4><a href="book.html">Book a Flight</a><a href="manage.html">Manage Booking</a><a href="checkin.html">Check-in</a><a href="status.html">Flight Status</a></div>
+<div><h4>Travel</h4><a href="timetable.html">Timetable</a><a href="destinations.html">Destinations</a><a href="#">Baggage</a><a href="#">Special Assistance</a></div>
+<div><h4>Company</h4><a href="about.html">About Us</a><a href="fleet.html">Our Fleet</a><a href="careers.html">Careers</a><a href="contact.html">Contact Us</a></div>
+<div><h4>Help</h4><a href="faq.html">FAQ</a><a href="terms.html">Terms & Conditions</a><a href="privacy.html">Privacy Policy</a><a href="conditions.html">Conditions of Carriage</a></div>
+</div><div class="footer-bottom">© 2026 Romeo Airlines · Connecting People with the World.</div></footer><script src="script.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded",()=>{
+ const q=new URLSearchParams(location.search);
+ const p=q.get("pnr")||localStorage.getItem("romeoPNR");
+ const l=localStorage.getItem("romeoLastName");
+ if(p) document.getElementById("managePnr").value=p;
+ if(l) document.getElementById("manageLast").value=l;
+ if(q.get("next")==="checkin" && p){
+   setTimeout(()=>{ 
+     document.getElementById("manageMessage").innerHTML='<b>Booking confirmed.</b> You can now continue automatically to Check-in.';
+     const btn=document.createElement("a"); btn.className="primary manage-next-btn"; btn.href="checkin.html?pnr="+encodeURIComponent(p); btn.textContent="Continue to Check-in →";
+     document.getElementById("manageMessage").appendChild(document.createElement("br")); document.getElementById("manageMessage").appendChild(btn);
+   },300);
+ }
+});
+</script></body></html>

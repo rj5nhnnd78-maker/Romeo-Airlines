@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Romeo Airlines | Book a Flight</title><link rel="icon" type="image/jpeg" href="logo.jpeg"><link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="header"><div class="container header-inner">
+<a class="brand" href="index.html"><img src="logo.jpeg" alt="Romeo Airlines"><span>Romeo <strong>Airlines</strong></span></a>
+<nav id="mainNav">
+<a href="index.html"><span class="en">Home</span><span class="ar">الرئيسية</span></a>
+<a href="manage.html"><span class="en">Manage Booking</span><span class="ar">إدارة الحجز</span></a>
+<a href="timetable.html"><span class="en">Timetable</span><span class="ar">جدول الرحلات</span></a>
+<a href="destinations.html"><span class="en">Destinations</span><span class="ar">الوجهات</span></a>
+<a href="about.html"><span class="en">About Us</span><span class="ar">من نحن</span></a>
+<a href="fleet.html"><span class="en">Our Fleet</span><span class="ar">أسطولنا</span></a>
+<a href="careers.html"><span class="en">Careers</span><span class="ar">الوظائف</span></a>
+<a href="contact.html"><span class="en">Contact Us</span><span class="ar">اتصل بنا</span></a>
+<a href="faq.html"><span class="en">FAQ</span><span class="ar">الأسئلة الشائعة</span></a>
+</nav>
+<div class="language-switch"><button class="ghost" id="languageToggle" onclick="toggleLanguage()">العربية</button></div>
+<button class="icon-btn" onclick="toggleMenu()">☰</button>
+</div></header>
+
+<main>
+<section class="page-hero"><div class="container"><div class="eyebrow">ROMEO AIRLINES</div>
+<h1>Book a Flight</h1><p>Everything related to your new reservation is handled here.</p></div></section>
+
+<section class="section booking-page">
+<div class="container">
+<div class="booking-flow-note">Your booking is completed step-by-step. After each selection, Romeo Airlines automatically moves you to the next step.</div>
+<div class="booking-progress" id="bookingProgress">
+<div class="bp active"><span>1</span><b>Search</b></div><i></i><div class="bp"><span>2</span><b>Flight</b></div><i></i><div class="bp"><span>3</span><b>Fare</b></div><i></i><div class="bp"><span>4</span><b>Passenger</b></div><i></i><div class="bp"><span>5</span><b>Seat</b></div><i></i><div class="bp"><span>6</span><b>Baggage</b></div><i></i><div class="bp"><span>7</span><b>Payment</b></div>
+</div>
+
+<div id="bookingStep"></div>
+
+<aside class="booking-summary" id="bookingSummary">
+<h3>Your trip</h3><div id="tripSummary">No flight selected yet.</div><hr>
+<div class="price-row"><span>Fare</span><b id="farePrice">$0</b></div>
+<div class="price-row"><span>Taxes & fees</span><b id="taxPrice">$0</b></div>
+<div class="price-row"><span>Extras</span><b id="extraPrice">$0</b></div><hr>
+<div class="total"><span>Total</span><strong id="totalPrice">$0</strong></div>
+</aside>
+</div>
+</section>
+</main>
+
+<footer><div class="container footer-grid">
+<div><img src="logo.jpeg" alt="Romeo Airlines"><p>Connecting Hearts, Redefining the Skies.</p></div>
+<div><h4>Booking</h4><a href="book.html">Book a Flight</a><a href="manage.html">Manage Booking</a><a href="checkin.html">Check-in</a></div>
+<div><h4>Travel</h4><a href="destinations.html">Destinations</a><a href="status.html">Flight Status</a><a href="timetable.html">Timetable</a></div>
+<div><h4>Company</h4><a href="about.html">About Us</a><a href="fleet.html">Our Fleet</a><a href="contact.html">Contact Us</a></div>
+</div><div class="footer-bottom">© 2026 Romeo Airlines</div></footer>
+
+
+<div class="calendar-modal" id="calendarModal">
+  <div class="calendar-box">
+    <div class="calendar-top">
+      <button type="button" class="cal-close" onclick="closeCalendar()">×</button>
+      <button type="button" class="cal-nav" onclick="changeMonth(-1)">‹</button>
+      <div class="calendar-title">
+        <select id="calMonth" onchange="jumpCalendar()"></select>
+        <select id="calYear" onchange="jumpCalendar()"></select>
+      </div>
+      <button type="button" class="cal-nav" onclick="changeMonth(1)">›</button>
+    </div>
+    <div class="calendar-weekdays">
+      <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+    </div>
+    <div class="calendar-days" id="calendarDays"></div>
+    <div class="calendar-bottom">
+      <button type="button" class="ghost" onclick="closeCalendar()">Cancel</button>
+      <button type="button" class="primary" onclick="selectToday()">Today</button>
+    </div>
+  </div>
+</div>
+<div class="modal" id="bookingModal"><div class="modal-box"><button class="close" onclick="closeBookingModal()">×</button><div id="bookingModalContent"></div></div></div>
+<script src="script.js"></script>
+<script>
+let B={step:1,trip:'round',from:'',to:'',dep:'',ret:'',passengers:1,cabin:'Economy',flight:null,fare:0,extra:0,seat:''};
+function money(n){return '$'+n.toLocaleString()}
+function bp(){document.querySelectorAll('.bp').forEach((x,i)=>x.classList.toggle('active',i+1<=B.step))}
+function prices(){let tax=Math.round(B.fare*.12);document.getElementById('farePrice').textContent=money(B.fare);document.getElementById('taxPrice').textContent=money(tax);document.getElementById('extraPrice').textContent=money(B.extra);document.getElementById('totalPrice').textContent=money(B.fare+tax+B.extra)}
+function renderBooking(){
+ bp();prices();
+ let s='';
+ if(B.step===1)s=`<div class="booking-card static"><div class="booking-widget-head"><div class="trip-tabs"><button class="trip ${B.trip==='round'?'active':''}" onclick="B.trip='round';renderBooking()">Round trip</button><button class="trip ${B.trip==='oneway'?'active':''}" onclick="B.trip='oneway';renderBooking()">One way</button></div></div>
+ <div class="search-grid booking-search-fields"><label class="field">From<div class="input-wrap">✈
+<select id="bf">
+<option value="">Select departure</option>
+<option value="Port Sudan (PZU)" ${B.from==="Port Sudan (PZU)"?"selected":""}>🇸🇩 Sudan — Port Sudan (PZU)</option>
+<option value="Nairobi (NBO)" ${B.from==="Nairobi (NBO)"?"selected":""}>🇰🇪 Kenya — Nairobi (NBO)</option>
+<option value="Addis Ababa (ADD)" ${B.from==="Addis Ababa (ADD)"?"selected":""}>🇪🇹 Ethiopia — Addis Ababa (ADD)</option>
+<option value="Tripoli (TIP)" ${B.from==="Tripoli (TIP)"?"selected":""}>🇱🇾 Libya — Tripoli (TIP)</option>
+<option value="Cairo (CAI)" ${B.from==="Cairo (CAI)"?"selected":""}>🇪🇬 Egypt — Cairo (CAI)</option>
+<option value="Juba (JUB)" ${B.from==="Juba (JUB)"?"selected":""}>🇸🇸 South Sudan — Juba (JUB)</option>
+<option value="Johannesburg (JNB)" ${B.from==="Johannesburg (JNB)"?"selected":""}>🇿🇦 South Africa — Johannesburg (JNB)</option>
+</select></div></label>
+ <label class="field to-field">To<div class="input-wrap">⌖
+<select id="bt">
+<option value="">Select destination</option>
+<option value="Port Sudan (PZU)" ${B.from==="Port Sudan (PZU)"?"selected":""}>🇸🇩 Sudan — Port Sudan (PZU)</option>
+<option value="Nairobi (NBO)" ${B.to==="Nairobi (NBO)"?"selected":""}>🇰🇪 Kenya — Nairobi (NBO)</option>
+<option value="Addis Ababa (ADD)" ${B.to==="Addis Ababa (ADD)"?"selected":""}>🇪🇹 Ethiopia — Addis Ababa (ADD)</option>
+<option value="Tripoli (TIP)" ${B.to==="Tripoli (TIP)"?"selected":""}>🇱🇾 Libya — Tripoli (TIP)</option>
+<option value="Cairo (CAI)" ${B.to==="Cairo (CAI)"?"selected":""}>🇪🇬 Egypt — Cairo (CAI)</option>
+<option value="Juba (JUB)" ${B.to==="Juba (JUB)"?"selected":""}>🇸🇸 South Sudan — Juba (JUB)</option>
+<option value="Johannesburg (JNB)" ${B.to==="Johannesburg (JNB)"?"selected":""}>🇿🇦 South Africa — Johannesburg (JNB)</option>
+</select></div></label>
+ <label class="field">Departure<div class="input-wrap calendar-input" onclick="openCalendar('departure')">◷ <input id="bd" type="text" value="${B.dep}" placeholder="Select date" readonly></div></label>
+ ${B.trip==='round'?`<label class="field">Return<div class="input-wrap calendar-input" onclick="openCalendar('return')">◷ <input id="br" type="text" value="${B.ret}" placeholder="Select date" readonly></div></label>`:''}
+ <label class="field">Passengers<div class="input-wrap">♙ <select id="bpass"><option value="1">1 Adult</option><option value="2">2 Adults</option><option value="3">3 Adults</option><option value="4">4 Adults</option></select></div></label>
+ <label class="field">Cabin<div class="input-wrap">◇ <select id="bcabin"><option>Economy</option><option>Business</option></select></div></label></div>
+ <button class="search-main" onclick="searchBooking()">Search Flights →</button></div>`;
+ if(B.step===2)s=`<div class="step-card"><div class="eyebrow">STEP 2</div><h2>Select your flight</h2><p>${B.from} → ${B.to} · ${B.dep}</p>
+ ${[['RA101','08:00','09:15',149],['RA201','13:30','15:00',219],['RA301','17:00','19:10',289]].map(f=>`<div class="flight-card"><div><small>${f[0]} · Romeo Airlines</small><div class="flight-time">${f[1]} → ${f[2]}</div><small>Non-stop</small></div><div class="fare"><strong>${money(f[3]*B.passengers)}</strong><button class="primary" onclick="chooseFlight('${f[0]}','${f[1]}','${f[2]}',${f[3]})">Select</button></div></div>`).join('')}</div>`;
+ if(B.step===3)s=`<div class="step-card"><div class="eyebrow">STEP 3</div><h2>Choose your fare</h2><div class="radio-card selected" onclick="selectFare('basic')"><b>Romeo Basic</b><p>Cabin baggage · Standard seat selection</p></div><div class="radio-card" onclick="selectFare('flex')"><b>Romeo Flex</b><p>Checked baggage · Free seat selection · +$45 per passenger</p></div><div class="step-hint">Select a fare to continue automatically.</div></div>`;
+ if(B.step===4)s=`<div class="step-card"><div class="eyebrow">STEP 4</div><h2>Passenger details</h2><div class="form-row"><input id="fname" placeholder="First name"><input id="lname" placeholder="Last name"></div><div class="form-row"><input id="email" type="email" placeholder="Email"><input id="phone" placeholder="Phone"></div><input id="nation" placeholder="Nationality"><label><input id="confirmPassenger" type="checkbox"> I confirm the passenger information is correct.</label><button class="primary" onclick="submitPassenger()">Continue</button></div>`;
+ if(B.step===5)s=`<div class="step-card"><div class="eyebrow">STEP 5</div><h2>Select your seat</h2><div class="seat-map">${['1A','1B','1C','1D','2A','2B','2C','2D','3A','3B','3C','3D','4A','4B','4C','4D'].map((x,i)=>`<button class="seat ${[2,7,12].includes(i)?'taken':''}" ${[2,7,12].includes(i)?'disabled':''} onclick="chooseSeat(this,'${x}')">${x}</button>`).join('')}</div><div class="step-hint">Select a seat to continue automatically.</div></div>`;
+ if(B.step===6)s=`<div class="step-card"><div class="eyebrow">STEP 6</div><h2>Baggage & extras</h2><div class="radio-card selected" onclick="selectBaggage(0)"><b>Included baggage</b><p>No additional charge.</p></div><div class="radio-card" onclick="selectBaggage(40)"><b>+23 kg checked bag</b><p>$40</p></div><div class="radio-card" onclick="selectBaggage(70)"><b>+32 kg checked bag</b><p>$70</p></div><div class="step-hint">Select your baggage option to continue automatically.</div></div>`;
+ if(B.step===7)s=`<div class="step-card"><div class="eyebrow">STEP 7</div><h2>Payment & confirmation</h2><p>Your total is <b>${money(B.fare+Math.round(B.fare*.12)+B.extra)}</b>.</p><div class="form-row"><input placeholder="Cardholder name"><input placeholder="Card number"></div><div class="form-row"><input placeholder="MM / YY"><input placeholder="CVV"></div><label><input id="payConfirm" type="checkbox"> I accept the Conditions of Carriage.</label><button class="primary" onclick="finishBooking()">Pay & Issue Ticket</button></div>`;
+ document.getElementById('bookingStep').innerHTML=s;prices();
+}
+function searchBooking(){B.from=document.getElementById('bf').value;B.to=document.getElementById('bt').value;B.dep=document.getElementById('bd').value;B.ret=document.getElementById('br')?.value||'';B.passengers=+document.getElementById('bpass').value;B.cabin=document.getElementById('bcabin').value;if(!B.from||!B.to||!B.dep){alert('Please select your departure, destination and departure date.');return}if(B.from===B.to){alert('Departure and destination cannot be the same.');return}B.step=2;renderBooking()}
+function chooseFlight(no,d,a,p){B.flight={no,d,a};B.fare=p*B.passengers;B.step=3;document.getElementById('tripSummary').innerHTML=`<b>${B.from} → ${B.to}</b><br>${B.dep} · ${no} · ${B.cabin}`;renderBooking()}
+function chooseSeat(btn,s){document.querySelectorAll('.seat').forEach(x=>x.classList.remove('chosen'));btn.classList.add('chosen');B.seat=s;setTimeout(()=>{B.step=6;renderBooking()},220)}
+function selectFare(type){B.extra=type==='flex'?45*B.passengers:0;B.step=4;renderBooking()}
+function submitPassenger(){if(!document.getElementById('confirmPassenger').checked){alert('Please confirm passenger details.');return}B.step=5;renderBooking()}
+function selectBaggage(amount){B.extra=amount;prices();setTimeout(()=>{B.step=7;renderBooking()},220)}
+function nextBooking(){B.step++;renderBooking()}
+function finishBooking(){if(!document.getElementById('payConfirm').checked){alert('Please accept the Conditions of Carriage.');return}let pnr=Math.random().toString(36).slice(2,8).toUpperCase();localStorage.setItem('romeoPNR',pnr);localStorage.setItem('romeoLastName',document.getElementById('lname')?.value||'');
+document.getElementById('bookingModalContent').innerHTML=`<div class="eyebrow">BOOKING CONFIRMED</div><h2>Booking successful</h2><p>Your PNR has been created:</p><div class="pnr">${pnr}</div><p>${B.from} → ${B.to}<br>${B.dep} · ${B.flight.no}<br>Seat ${B.seat}</p><p class="auto-next">Taking you to Manage Booking...</p>`;
+document.getElementById('bookingModal').classList.add('open');
+setTimeout(()=>{location.href='manage.html?pnr='+pnr+'&next=checkin'},1800)}
+function closeBookingModal(){document.getElementById('bookingModal').classList.remove('open')}
+
+let calendarTarget='departure';
+let calendarDate=new Date();
+function openCalendar(target){
+  calendarTarget=target;
+  const current=(target==='departure'?B.dep:B.ret);
+  if(current){
+    const parts=current.split('-');
+    if(parts.length===3) calendarDate=new Date(+parts[0],+parts[1]-1,+parts[2]);
+  }else{
+    calendarDate=new Date();
+  }
+  populateCalendarSelectors();
+  renderCalendar();
+  document.getElementById('calendarModal').classList.add('open');
+}
+function closeCalendar(){document.getElementById('calendarModal').classList.remove('open')}
+function populateCalendarSelectors(){
+  const m=document.getElementById('calMonth'), y=document.getElementById('calYear');
+  const months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  m.innerHTML=months.map((x,i)=>`<option value="${i}">${x}</option>`).join('');
+  const now=new Date(), min=now.getFullYear(), max=min+3;
+  y.innerHTML=Array.from({length:max-min+1},(_,i)=>`<option value="${min+i}">${min+i}</option>`).join('');
+  m.value=calendarDate.getMonth(); y.value=calendarDate.getFullYear();
+}
+function jumpCalendar(){
+  calendarDate=new Date(+document.getElementById('calYear').value,+document.getElementById('calMonth').value,1);
+  renderCalendar();
+}
+function changeMonth(delta){
+  calendarDate=new Date(calendarDate.getFullYear(),calendarDate.getMonth()+delta,1);
+  if(calendarDate.getFullYear()>new Date().getFullYear()+3) calendarDate.setFullYear(new Date().getFullYear()+3);
+  if(calendarDate.getFullYear()<new Date().getFullYear()) calendarDate=new Date(new Date().getFullYear(),0,1);
+  populateCalendarSelectors(); renderCalendar();
+}
+function renderCalendar(){
+  const box=document.getElementById('calendarDays');
+  const y=calendarDate.getFullYear(), m=calendarDate.getMonth();
+  const first=new Date(y,m,1).getDay(), days=new Date(y,m+1,0).getDate();
+  const today=new Date(); today.setHours(0,0,0,0);
+  let html='';
+  for(let i=0;i<first;i++) html+='<span class="cal-empty"></span>';
+  for(let d=1;d<=days;d++){
+    const date=new Date(y,m,d); date.setHours(0,0,0,0);
+    const iso=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const disabled=date<today;
+    const selected=(calendarTarget==='departure'?B.dep:B.ret)===iso;
+    const cls=`cal-day ${disabled?'disabled':''} ${selected?'selected':''} ${date.getTime()===today.getTime()?'today':''}`;
+    html+=`<button type="button" class="${cls}" ${disabled?'disabled':''} onclick="pickDate('${iso}')">${d}</button>`;
+  }
+  box.innerHTML=html;
+}
+function pickDate(iso){
+  if(calendarTarget==='departure'){B.dep=iso; if(B.ret && B.ret<iso) B.ret='';}
+  else {B.ret=iso;}
+  closeCalendar(); renderBooking();
+}
+function selectToday(){
+  const t=new Date(); const iso=`${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`;
+  pickDate(iso);
+}
+
+renderBooking();
+</script>
+</body></html>

@@ -1,0 +1,4 @@
+Romeo Airlines — Our Fleet final layout
+Row 1: Boeing 737 | Fokker 50 | Fokker 70
+Row 2: Dash 8 | Bombardier Q Series | ATR 72-500
+Large equal cards, large aircraft image area, bold titles, 3 columns on desktop.

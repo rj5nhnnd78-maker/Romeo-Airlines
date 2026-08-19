@@ -1,0 +1,11 @@
+Destination images are sourced from Wikimedia Commons and displayed via their original file URLs.
+Selected sources:
+- Port Sudan: https://commons.wikimedia.org/wiki/File:Port_Sudan_%D8%A8%D9%88%D8%B1%D8%AA%D8%B3%D9%88%D8%AF%D8%A7%D9%86.jpg
+- Nairobi: https://commons.wikimedia.org/wiki/File:Nairobi_skyline_P1000021.jpg
+- Addis Ababa: https://commons.wikimedia.org/wiki/File:Addis_Ababa_skyline.jpg
+- Tripoli: https://commons.wikimedia.org/wiki/File:Tripoli_libya.jpg
+- Cairo/Giza: https://commons.wikimedia.org/wiki/File:Pyramids-cairo-egypt.jpg
+- Juba: https://commons.wikimedia.org/wiki/File:Juba_City.jpg
+- Johannesburg: https://commons.wikimedia.org/wiki/File:Johannesburg_skyline.jpg
+
+Check each source page for its current license/attribution requirements before commercial publication.

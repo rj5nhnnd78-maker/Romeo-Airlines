@@ -1,0 +1,44 @@
+<!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Romeo Airlines | Check-in</title><link rel="icon" type="image/jpeg" href="logo.jpeg"><link rel="stylesheet" href="styles.css"></head><body>
+<header class="header">
+<div class="container header-inner">
+<a class="brand" href="index.html"><img src="logo.jpeg" alt="Romeo Airlines"><span>Romeo <strong>Airlines</strong></span></a>
+<nav id="mainNav">
+<a href="index.html"><span class="en">Home</span><span class="ar">الرئيسية</span></a>
+<a href="manage.html"><span class="en">Manage Booking</span><span class="ar">إدارة الحجز</span></a>
+<a href="timetable.html"><span class="en">Timetable</span><span class="ar">جدول الرحلات</span></a>
+<a href="destinations.html"><span class="en">Destinations</span><span class="ar">الوجهات</span></a>
+<a href="about.html"><span class="en">About Us</span><span class="ar">من نحن</span></a>
+<a href="fleet.html"><span class="en">Our Fleet</span><span class="ar">أسطولنا</span></a>
+<a href="careers.html"><span class="en">Careers</span><span class="ar">الوظائف</span></a>
+<a href="contact.html"><span class="en">Contact Us</span><span class="ar">اتصل بنا</span></a>
+<a href="faq.html"><span class="en">FAQ</span><span class="ar">الأسئلة الشائعة</span></a>
+</nav>
+<div class="language-switch"><button class="ghost" id="languageToggle" onclick="toggleLanguage()">العربية</button></div>
+<button class="icon-btn" onclick="toggleMenu()">☰</button>
+</div></header><main>
+<section class="page-hero"><div class="container"><div class="eyebrow">YOUR JOURNEY</div><h1>Check-in</h1><p>Complete check-in after your booking has been confirmed.</p></div></section>
+<section class="section"><div class="container narrow">
+<div class="manage-flow compact">
+<div class="manage-flow-step done"><span>✓</span><div><b>Manage Booking</b><small>Booking confirmed</small></div></div><div class="flow-arrow">↓</div>
+<div class="manage-flow-step active"><span>2</span><div><b>Check-in</b><small>Complete passenger check-in</small></div></div><div class="flow-arrow">↓</div>
+<div class="manage-flow-step"><span>3</span><div><b>Flight Status</b><small>Follow your flight</small></div></div>
+</div>
+<div class="form-card">
+<h2>Online Check-in</h2>
+<label>Booking Reference / PNR<input id="checkPnr" placeholder="e.g. RA7K2P"></label>
+<label>Last Name<input id="checkLast" placeholder="Passenger last name"></label>
+<button class="primary" onclick="completeCheckin()">Complete Check-in</button>
+<p id="checkMessage" class="notice"></p>
+</div></div></section>
+</main><footer><div class="container footer-grid">
+<div><img src="logo.jpeg" alt="Romeo Airlines"><p>Connecting Hearts, Redefining the Skies.</p></div>
+<div><h4>Booking</h4><a href="book.html">Book a Flight</a><a href="manage.html">Manage Booking</a><a href="checkin.html">Check-in</a><a href="status.html">Flight Status</a></div>
+<div><h4>Travel</h4><a href="timetable.html">Timetable</a><a href="destinations.html">Destinations</a><a href="#">Baggage</a><a href="#">Special Assistance</a></div>
+<div><h4>Company</h4><a href="about.html">About Us</a><a href="fleet.html">Our Fleet</a><a href="careers.html">Careers</a><a href="contact.html">Contact Us</a></div>
+<div><h4>Help</h4><a href="faq.html">FAQ</a><a href="terms.html">Terms & Conditions</a><a href="privacy.html">Privacy Policy</a><a href="conditions.html">Conditions of Carriage</a></div>
+</div><div class="footer-bottom">© 2026 Romeo Airlines · Connecting People with the World.</div></footer><script src="script.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded",()=>{const q=new URLSearchParams(location.search);const p=q.get("pnr")||localStorage.getItem("romeoPNR");const l=localStorage.getItem("romeoLastName");if(p)document.getElementById("checkPnr").value=p;if(l)document.getElementById("checkLast").value=l});
+function completeCheckin(){const p=document.getElementById("checkPnr").value.trim();const l=document.getElementById("checkLast").value.trim();if(!p||!l){alert("Please enter your PNR and last name.");return}localStorage.setItem("romeoPNR",p);localStorage.setItem("romeoLastName",l);document.getElementById("checkMessage").innerHTML="<b>Check-in completed.</b> Taking you to Flight Status...";setTimeout(()=>location.href="status.html?pnr="+encodeURIComponent(p),1200)}
+</script></body></html>
