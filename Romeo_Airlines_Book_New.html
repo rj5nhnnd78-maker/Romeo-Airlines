@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Romeo Airlines | Book a Flight</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,Helvetica,sans-serif;color:#10294a;background:#f7f8fa}
+.header{height:74px;background:#fff;border-bottom:1px solid #e5e7eb;display:flex;align-items:center;justify-content:center;position:relative}
+.brand{font-size:24px;font-weight:800;color:#10294a;text-decoration:none}
+.menu{position:absolute;left:28px;font-size:28px}
+.language{position:absolute;right:28px;font-size:14px}
+.hero{min-height:520px;display:flex;align-items:center;position:relative;overflow:hidden;background:linear-gradient(90deg,rgba(4,30,63,.98),rgba(8,48,88,.86) 43%,rgba(210,220,230,.35)),url("logo.jpeg") center right/cover no-repeat}
+.hero-content{width:min(1180px,92%);margin:auto;padding:70px 0;color:white}
+.hero h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(54px,7vw,92px);line-height:.95;max-width:680px;letter-spacing:-2px}
+.hero h1 span{color:#70bfff}
+.hero p{margin-top:32px;max-width:650px;font-size:21px;line-height:1.65}
+.booking{background:#fff;width:min(1100px,92%);margin:-45px auto 70px;position:relative;border-radius:18px;box-shadow:0 15px 45px rgba(16,41,74,.14);padding:34px}
+.booking-title{text-align:center;margin-bottom:28px}
+.eyebrow{color:#999;font-size:13px;letter-spacing:7px;font-weight:700}
+.booking-title h2{margin-top:10px;font-family:Georgia,"Times New Roman",serif;font-size:42px;color:#222}
+.booking-title p{margin:12px auto 0;color:#666;font-size:17px;line-height:1.6;max-width:700px}
+.trip-types{display:flex;gap:28px;border-bottom:1px solid #ddd;padding-bottom:18px;margin-bottom:25px;font-weight:700;color:#183b67}
+.trip-types input{accent-color:#1769c2}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.field{border:1px solid #d8dce2;border-radius:10px;padding:12px 15px;background:#fff}
+.field.full{grid-column:1/-1}
+.field label{display:block;font-size:13px;color:#555;margin-bottom:8px}
+.field input,.field select{width:100%;border:0;outline:0;font-size:16px;color:#333;background:transparent}
+.search{width:100%;margin-top:22px;padding:16px;border:0;border-radius:9px;background:#082a50;color:white;font-size:17px;font-weight:700}
+@media(max-width:700px){
+.header{height:64px}.brand{font-size:20px}.menu{left:18px}.language{right:18px}
+.hero{min-height:510px;background:linear-gradient(90deg,rgba(4,30,63,.94),rgba(8,48,88,.78)),url("logo.jpeg") center/cover no-repeat}
+.hero-content{padding:55px 0}.hero h1{font-size:56px;max-width:340px}.hero p{font-size:18px;max-width:340px}
+.booking{width:94%;margin:-25px auto 40px;padding:22px 18px}.booking-title h2{font-size:34px}
+.fields{grid-template-columns:1fr}.field.full{grid-column:auto}
+.trip-types{justify-content:space-between;gap:8px;font-size:14px}
+}
+</style>
+</head>
+<body>
+<header class="header">
+<div class="menu">☰</div>
+<a class="brand" href="index.html">ROMEO AIRLINES</a>
+<div class="language">◎ EN⌄</div>
+</header>
+
+<section class="hero">
+<div class="hero-content">
+<h1>Hearts,<br><span>Redefining the Skies.</span></h1>
+<p>Connecting people, cities and communities with a modern, reliable and professional airline experience.</p>
+</div>
+</section>
+
+<section class="booking">
+<div class="booking-title">
+<div class="eyebrow">BOOK</div>
+<h2>Book a flight</h2>
+<p>Search for Romeo Airlines flights and book online. Discover our routes, schedules, and the experience you can look forward to on board.</p>
+</div>
+
+<div class="trip-types">
+<label><input type="radio" name="trip" checked> Round Trip</label>
+<label><input type="radio" name="trip"> One Way</label>
+<label><input type="radio" name="trip"> Multi-City</label>
+</div>
+
+<div class="fields">
+<div class="field"><label>From</label><input type="text" placeholder="Departure city or airport"></div>
+<div class="field"><label>To</label><input type="text" placeholder="Arrival city or airport"></div>
+<div class="field"><label>Depart</label><input type="date"></div>
+<div class="field"><label>Return</label><input type="date"></div>
+<div class="field full"><label>Cabin Class & Passengers</label><select><option>1 Passenger, Economy</option><option>1 Passenger, Business</option><option>2 Passengers, Economy</option><option>2 Passengers, Business</option></select></div>
+</div>
+
+<button class="search" onclick="alert('Flight search is ready to be connected to the booking system.')">Search Flights</button>
+</section>
+</body>
+</html>
